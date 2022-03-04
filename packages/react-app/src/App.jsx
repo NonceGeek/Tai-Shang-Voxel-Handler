@@ -173,6 +173,52 @@ function App(props) {
   const addressFromENS = useResolveName(mainnetProvider, "austingriffith.eth");
   console.log("🏷 Resolved austingriffith.eth as:",addressFromENS)
   */
+  // keep track of a variable from the contract in the local React state:
+  const balance = useContractReader(readContracts, "TaiShangVoxel", "balanceOf", [address]);
+  console.log("🤗 balance:", balance);
+
+  // 📟 Listen for broadcast events
+  // const transferEvents = useEventListener(readContracts, "TaiShangVoxel", "Transfer", localProvider, 1);
+  // console.log("📟 Transfer events:", transferEvents);
+  //
+  // 🧠 This effect will update yourCollectibles by polling when your balance changes
+  //
+  const yourBalance = balance && balance.toNumber && balance.toNumber();
+  const [yourCollectibles, setYourCollectibles] = useState();
+
+  useEffect(() => {
+    const updateYourCollectibles = async () => {
+      const collectibleUpdate = [];
+      for (let tokenIndex = 0; tokenIndex < balance; tokenIndex++) {
+        try {
+          console.log("GEtting token index", tokenIndex);
+          const tokenId = await readContracts.TaiShangVoxel.tokenOfOwnerByIndex(address, tokenIndex);
+          console.log("tokenId", tokenId);
+          const tokenURI = await readContracts.TaiShangVoxel.tokenURI(tokenId);
+          const jsonManifestString = atob(tokenURI.substring(29))
+          console.log("tokenURI", tokenURI);
+          console.log("jsonManifestString", jsonManifestString);
+/*
+          const ipfsHash = tokenURI.replace("https://ipfs.io/ipfs/", "");
+          console.log("ipfsHash", ipfsHash);
+          const jsonManifestBuffer = await getFromIPFS(ipfsHash);
+        */
+          try {
+            const jsonManifest = JSON.parse(jsonManifestString);
+            console.log("jsonManifest", jsonManifest);
+            collectibleUpdate.push({ id: tokenId, uri: tokenURI, owner: address, ...jsonManifest });
+          } catch (e) {
+            console.log(e);
+          }
+
+        } catch (e) {
+          console.log(e);
+        }
+      }
+      setYourCollectibles(collectibleUpdate.reverse());
+    };
+    updateYourCollectibles();
+  }, [address, yourBalance]);
 
   //
   // 🧫 DEBUG 👨🏻‍🔬
@@ -280,7 +326,17 @@ function App(props) {
       <Switch>
         <Route exact path="/">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
-          <Home yourLocalBalance={yourLocalBalance} readContracts={readContracts} />
+          <Home
+            isSigner={userSigner}
+            yourCollectibles={yourCollectibles}
+            loadWeb3Modal={loadWeb3Modal}
+            address={address}
+            blockExplorer={blockExplorer}
+            mainnetProvider={mainnetProvider}
+            tx={tx}
+            writeContracts={writeContracts}
+            readContracts={readContracts}
+            />
         </Route>
         <Route exact path="/debug">
           {/*
@@ -290,7 +346,7 @@ function App(props) {
             */}
 
           <Contract
-            name="YourContract"
+            name="TaiShangVoxel"
             price={price}
             signer={userSigner}
             provider={localProvider}

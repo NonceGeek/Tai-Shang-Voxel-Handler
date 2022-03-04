@@ -73,7 +73,8 @@ function Home({
                   }
                 >
                   <a href={"https://opensea.io/assets/"+(readContracts && readContracts.TaiShangVoxel && readContracts.TaiShangVoxel.address)+"/"+item.id} target="_blank">
-                  <img src={item.image} />
+                  {/* <img src={item.image} /> */}
+                  <iframe src={item.image} style={{width: "200px",height: "200px"}}></iframe>
                   </a>
                   <div>{item.description}</div>
                 </Card>

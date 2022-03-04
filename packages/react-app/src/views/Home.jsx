@@ -72,7 +72,7 @@ function Home({
                     </div>
                   }
                 >
-                  <a href={"https://opensea.io/assets/"+(readContracts && readContracts.YourCollectible && readContracts.YourCollectible.address)+"/"+item.id} target="_blank">
+                  <a href={"https://opensea.io/assets/"+(readContracts && readContracts.TaiShangVoxel && readContracts.TaiShangVoxel.address)+"/"+item.id} target="_blank">
                   <img src={item.image} />
                   </a>
                   <div>{item.description}</div>
@@ -99,7 +99,7 @@ function Home({
                   <Button
                     onClick={() => {
                       console.log("writeContracts", writeContracts);
-                      tx(writeContracts.YourCollectible.transferFrom(address, transferToAddresses[id], id));
+                      tx(writeContracts.TaiShangVoxel.transferFrom(address, transferToAddresses[id], id));
                     }}
                   >
                     Transfer

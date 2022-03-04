@@ -26,18 +26,36 @@ function Home({
   // you can also use hooks locally in your component of choice
   // in this case, let's keep track of 'purpose' variable from our contract
   // const purpose = useContractReader(readContracts, "YourContract", "purpose");
-  const [uri, setUri] = useState("");
+  const [mintData, setMintData] = useState({});
   const [transferToAddresses, setTransferToAddresses] = useState({});
   return (
     <div>
       {/* Mint button */}
       <div style={{ maxWidth: 820, margin: "auto", marginTop: 32, paddingBottom: 32 }}>
-        <div style={{ margin: 10, }}>
-          <label>URI: </label>
+        <div style={{ margin: 10}}>
+          <span>Vox URI</span>
           <Input
-            placeholder="https://arweave.net/..."
+            placeholder="eg. https://5ywn6daenz6poefpjkgs3c2vdgtzsk2vevam6aozkfzzzwrmgi.arweave.net/nFF3J4VB0BP9eHt35gdffGuwCXaHfXwtJl2K6u4GyA0"
             onChange={e => {
-              setUri(e.target.value);
+              setMintData({...mintData, uri: e.target.value});
+            }}
+          />
+        </div>
+        <div style={{ margin: 10}}>
+          <span>Github Pages URL</span>
+          <Input
+            placeholder="eg. https://welightproject.github.io/voxel-viewer-page/"
+            onChange={e => {
+              setMintData({...mintData, url: e.target.value});
+            }}
+          />
+        </div>
+        <div style={{ margin: 10}}>
+          <span>Commit Hash</span>
+          <Input
+            placeholder="eg. e070f55ef44f41661a65048c0fd30af33e20ff7c"
+            onChange={e => {
+              setMintData({...mintData, commit: e.target.value});
             }}
           />
         </div>
@@ -45,7 +63,7 @@ function Home({
           <Button
             type={"primary"}
             onClick={() => {
-              tx(writeContracts.TaiShangVoxel.mint(uri));
+              tx(writeContracts.TaiShangVoxel.mint(mintData.uri, mintData.url, mintData.commit));
             }}
           >
             MINT
@@ -74,7 +92,7 @@ function Home({
                 >
                   <a href={"https://opensea.io/assets/"+(readContracts && readContracts.TaiShangVoxel && readContracts.TaiShangVoxel.address)+"/"+item.id} target="_blank">
                   {/* <img src={item.image} /> */}
-                  <iframe src={item.image} style={{width: "200px",height: "200px"}}></iframe>
+                  <iframe src={item.external_url} style={{width: "200px",height: "200px"}}></iframe>
                   </a>
                   <div>{item.description}</div>
                 </Card>

@@ -17,8 +17,7 @@ contract TaiShangVoxel is ERC721Enumerable, Ownable{
     using Counters for Counters.Counter;
     Counters.Counter private tokenCounter;
 
-    // string private baseURI = "https://arweave.net/";
-    mapping (uint256 => string) public tokenURIs;
+    mapping (uint256 => string[3]) public tokenURIs;
 
     constructor() public ERC721("Tai Shang Voxel", "TSV") {
         // Tai Shang Voxel
@@ -26,10 +25,12 @@ contract TaiShangVoxel is ERC721Enumerable, Ownable{
 
     // ============ PUBLIC FUNCTIONS FOR MINTING ============
 
-    function mint(string memory uriId) external returns (uint256){
+    function mint(string memory uri, string memory url, string memory commit) external returns (uint256){
         uint256 _tokenId = nextTokenId();
         _safeMint(msg.sender, _tokenId);
-        tokenURIs[_tokenId] = uriId;
+        tokenURIs[_tokenId][0] = uri;
+        tokenURIs[_tokenId][1] = url;
+        tokenURIs[_tokenId][2] = commit;
         return _tokenId;
     }
 
@@ -48,14 +49,14 @@ contract TaiShangVoxel is ERC721Enumerable, Ownable{
 
     function tokenImage(uint256 tokenId) public view returns (string memory) {
         require(_exists(tokenId), "Nonexistent token");
-        return string(abi.encodePacked(tokenURIs[tokenId]));
+        return string(abi.encodePacked(tokenURIs[tokenId][0]));
     }
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         require(_exists(tokenId), "Nonexistent token");
         string memory name = string(abi.encodePacked('Tai Shang Voxel #', tokenId.toString()));
         string memory description = string(abi.encodePacked('A Tai Shang Voxel token created'));
-        string memory image = string(abi.encodePacked(tokenURIs[tokenId]));
+        string memory image = tokenImage(tokenId);
 
         return
           string(
@@ -72,7 +73,13 @@ contract TaiShangVoxel is ERC721Enumerable, Ownable{
                               ', "owner":"',
                               (uint160(ownerOf(tokenId))).toHexString(20),
                               '", "image": "',
+                              tokenURIs[tokenId][1],
+                              '", "external_url": "',
+                              tokenURIs[tokenId][1],
+                              '", "uri": "',
                               image,
+                              '", "commit": "',
+                              tokenURIs[tokenId][2],
                               '"}'
                           )
                         )

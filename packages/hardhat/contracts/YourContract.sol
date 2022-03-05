@@ -55,7 +55,10 @@ contract TaiShangVoxel is ERC721Enumerable, Ownable{
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         require(_exists(tokenId), "Nonexistent token");
         string memory name = string(abi.encodePacked('Tai Shang Voxel #', tokenId.toString()));
-        string memory description = string(abi.encodePacked('A Tai Shang Voxel token created'));
+        string memory description = string(abi.encodePacked(
+            'A Tai Shang Voxel token created by ', (uint160(ownerOf(tokenId))).toHexString(20), 
+            '. To verify, please use commit hash ', tokenURIs[tokenId][2],
+            '. To view the artwork, visit ', tokenURIs[tokenId][1]));
         string memory image = tokenImage(tokenId);
 
         return
@@ -70,11 +73,13 @@ contract TaiShangVoxel is ERC721Enumerable, Ownable{
                               '", "description":"',
                               description,
                               '", "attributes": []',
-                              ', "owner":"',
+                              ', "creator":"',
                               (uint160(ownerOf(tokenId))).toHexString(20),
                               '", "image": "',
                               tokenURIs[tokenId][1],
                               '", "external_url": "',
+                              tokenURIs[tokenId][1],
+                              '", "animation_url": "',
                               tokenURIs[tokenId][1],
                               '", "uri": "',
                               image,

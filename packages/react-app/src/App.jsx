@@ -361,9 +361,16 @@ function App(props) {
         <Route exact path="/play_with_voxel">
           <p></p>
           <p></p>
-          <a href="https://www.google.com" target="_blank" rel="noreferrer">
-            Create Voxels!
-          </a>
+          <p>
+            Create Voxels! &nbsp;
+            <a href="https://www.youtube.com/watch?v=J5fK79E_RXE" target="_blank" rel="noreferrer">
+              Tutorial
+            </a>
+            &nbsp;/&nbsp;
+            <a href="https://ephtracy.github.io/#ss-carousel_ss" target="_blank" rel="noreferrer">
+              Download MagicVoxel
+            </a>
+          </p>
           <p></p>
           <p>↓</p>
           <p></p>
@@ -373,7 +380,7 @@ function App(props) {
           <p></p>
           <p>↓</p>
           <p></p>
-          <a href="https://www.google.com" target="_blank" rel="noreferrer">
+          <a href="https://mirror.xyz/0x73c7448760517E3E6e416b2c130E3c6dB2026A1d/OzUFOPfgAcZQ4MY1eu3ce87SMULiccAFeeIcCWBfuAg" target="_blank" rel="noreferrer">
             Voxel to HTML by Github-pages Using Template 
           </a>
           <p></p>
@@ -386,7 +393,7 @@ function App(props) {
           <p>↓</p>
           <p></p>
           <a href="https://www.google.com" target="_blank" rel="noreferrer">
-            Make Voxel NFT from Virtual to Actual One by 3D Print!
+            Make Voxel NFT from Virtual to Actual One by 3D Print! //TODO
           </a>
         </Route>
       </Switch>

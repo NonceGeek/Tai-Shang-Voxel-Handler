@@ -309,6 +309,9 @@ function App(props) {
         <Menu.Item key="/debug">
           <Link to="/debug">Debug Contracts</Link>
         </Menu.Item>
+        <Menu.Item key="/play_with_voxel">
+          <Link to="/play_with_voxel">Play With Voxel</Link>
+        </Menu.Item>
         {/* <Menu.Item key="/hints">
           <Link to="/hints">Hints</Link>
         </Menu.Item>
@@ -355,57 +358,36 @@ function App(props) {
             contractConfig={contractConfig}
           />
         </Route>
-        <Route path="/hints">
-          <Hints
-            address={address}
-            yourLocalBalance={yourLocalBalance}
-            mainnetProvider={mainnetProvider}
-            price={price}
-          />
-        </Route>
-        <Route path="/exampleui">
-          <ExampleUI
-            address={address}
-            userSigner={userSigner}
-            mainnetProvider={mainnetProvider}
-            localProvider={localProvider}
-            yourLocalBalance={yourLocalBalance}
-            price={price}
-            tx={tx}
-            writeContracts={writeContracts}
-            readContracts={readContracts}
-            purpose={purpose}
-          />
-        </Route>
-        <Route path="/mainnetdai">
-          <Contract
-            name="DAI"
-            customContract={mainnetContracts && mainnetContracts.contracts && mainnetContracts.contracts.DAI}
-            signer={userSigner}
-            provider={mainnetProvider}
-            address={address}
-            blockExplorer="https://etherscan.io/"
-            contractConfig={contractConfig}
-            chainId={1}
-          />
-          {/*
-            <Contract
-              name="UNI"
-              customContract={mainnetContracts && mainnetContracts.contracts && mainnetContracts.contracts.UNI}
-              signer={userSigner}
-              provider={mainnetProvider}
-              address={address}
-              blockExplorer="https://etherscan.io/"
-            />
-            */}
-        </Route>
-        <Route path="/subgraph">
-          <Subgraph
-            subgraphUri={props.subgraphUri}
-            tx={tx}
-            writeContracts={writeContracts}
-            mainnetProvider={mainnetProvider}
-          />
+        <Route exact path="/play_with_voxel">
+          <p></p>
+          <p></p>
+          <a href="https://www.google.com" target="_blank" rel="noreferrer">
+            Create Voxels!
+          </a>
+          <p></p>
+          <p>↓</p>
+          <p></p>
+          <a href="https://arweave.net/7izfDARufPcQr0qNLYtVGaeZK1UlQM8B_2VFznNosMs" target="_blank" rel="noreferrer">
+            Upload Voxel File to Arweave by Permaweb Dropper on Arweave
+          </a>
+          <p></p>
+          <p>↓</p>
+          <p></p>
+          <a href="https://www.google.com" target="_blank" rel="noreferrer">
+            Voxel to HTML by Github-pages Using Template 
+          </a>
+          <p></p>
+          <p>↓</p>
+          <p></p>
+          <a href="/" target="" rel="noreferrer">
+            Mint Voxel as an NFT!
+          </a>
+          <p></p>
+          <p>↓</p>
+          <p></p>
+          <a href="https://www.google.com" target="_blank" rel="noreferrer">
+            Make Voxel NFT from Virtual to Actual One by 3D Print!
+          </a>
         </Route>
       </Switch>
 

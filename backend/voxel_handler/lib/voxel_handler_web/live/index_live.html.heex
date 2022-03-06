@@ -1,0 +1,13 @@
+<%= if @logined == false do%>
+    Please login first.
+    Test Acct: leeduckgo@leeduckgo.com 
+    Test Pwd: 123456789
+<% else %>
+    <%= for order <- @orders do%>
+        <b>order id: </b> <%= order.unique_id %>
+        <b>order info: </b> <%= order.info %>
+        <b>signature: </b> <%= order.signature %>
+        <b>if finished: </b> <%= order.finished %>
+        <hr>
+    <% end %>
+<% end %>

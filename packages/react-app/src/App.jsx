@@ -67,8 +67,8 @@ const USE_NETWORK_SELECTOR = false;
 const web3Modal = Web3ModalSetup();
 
 // backend for voxel_handler
-// const serverUrl = "http://localhost:4000/voxel_handler/api/v1/place_order"; // elixir backend
-const serverUrl = "http://localhost:4000/voxel_handler/api/v1/verify_sig"; // elixir backend
+const serverUrl = "http://localhost:4000/voxel_handler/api/v1/place_order"; // elixir backend
+// const serverUrl = "http://localhost:4000/voxel_handler/api/v1/verify_sig"; // elixir backend
 // 🛰 providers
 const providers = [
   "https://eth-mainnet.gateway.pokt.network/v1/lb/611156b4a585a20035148406",
@@ -326,17 +326,21 @@ function App(props) {
         try{
           const msgToSign = await axios.get(serverUrl)
           console.log("msgToSign",msgToSign)
-          if(msgToSign.data && msgToSign.data.length > 32){//<--- traffic escape hatch?
+          // TODO: change "DongciDaciDongciDaciDongciDaciDongciDaciDongciDaci" to an text area above the btn
+          let message = msgToSign.data + "DongciDaciDongciDaciDongciDaciDongciDaciDongciDaci";
+          if(message && message.length > 32){//<--- traffic escape hatch?
             let currentLoader = setTimeout(()=>{setLoading(false)},4000)
-            let message = msgToSign.data.replace("**ADDRESS**",address)
+            // let message = msgToSign.data.replace("**ADDRESS**",address)
+            
             let sig = await injectedProvider.send("personal_sign", [ message, address ]);
-            clearTimeout(currentLoader)
-            currentLoader = setTimeout(()=>{setLoading(false)},4000)
+            clearTimeout(currentLoader);
+            currentLoader = setTimeout(()=>{setLoading(false)},4000);
             console.log("sig",sig)
             const res = await axios.post(serverUrl, {
               address: address,
               message: message,
               signature: sig,
+              unique_id: msgToSign.data,
             })
             clearTimeout(currentLoader)
             setLoading(false)
@@ -357,7 +361,7 @@ function App(props) {
 
 
       }}>
-        <span style={{marginRight:8}}>🔏</span>  sign a message with your ethereum wallet
+        <span style={{marginRight:8}}>🔏</span>  sign order info and submit
       </Button>
     )
   }

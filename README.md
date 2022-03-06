@@ -1,7 +1,5 @@
 # Tai-Shang-Voxel-Handler
 
-## Quick Start
-
 0. Prerequisites: [Node (v16 LTS)](https://nodejs.org/en/download/) plus [Yarn](https://classic.yarnpkg.com/en/docs/install/) and [Git](https://git-scm.com/downloads)
 
 1. clone/fork WeLightProject/Tai-Shang-Voxel-Handler:

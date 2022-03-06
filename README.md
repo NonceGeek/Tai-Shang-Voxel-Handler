@@ -46,6 +46,8 @@ yarn deploy
 
 ![3](tutorial_pictures/3_mint%20voxel%20as%20nft.png)
 
-10. Done! Enjoy and try it!
+10. [Run Backend](https://github.com/WeLightProject/Tai-Shang-Voxel-Handler/blob/master/backend/voxel_handler/README.md), submit the order from dApp to backend.
+
+11. Done! Enjoy and try it!
 
 ![4](tutorial_pictures/4_final%20nft.png)

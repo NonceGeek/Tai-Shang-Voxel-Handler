@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/Tai-Shang-Voxel-Handler/static/css/main.bb62dc15.chunk.css",
-    "main.js": "/Tai-Shang-Voxel-Handler/static/js/main.56f215b5.chunk.js",
-    "main.js.map": "/Tai-Shang-Voxel-Handler/static/js/main.56f215b5.chunk.js.map",
-    "runtime-main.js": "/Tai-Shang-Voxel-Handler/static/js/runtime-main.3039dbca.js",
-    "runtime-main.js.map": "/Tai-Shang-Voxel-Handler/static/js/runtime-main.3039dbca.js.map",
-    "static/css/2.d8e886af.chunk.css": "/Tai-Shang-Voxel-Handler/static/css/2.d8e886af.chunk.css",
-    "static/js/2.f5691f45.chunk.js": "/Tai-Shang-Voxel-Handler/static/js/2.f5691f45.chunk.js",
-    "static/js/2.f5691f45.chunk.js.map": "/Tai-Shang-Voxel-Handler/static/js/2.f5691f45.chunk.js.map",
+    "main.js": "/Tai-Shang-Voxel-Handler/static/js/main.b6b95eaf.chunk.js",
+    "main.js.map": "/Tai-Shang-Voxel-Handler/static/js/main.b6b95eaf.chunk.js.map",
+    "runtime-main.js": "/Tai-Shang-Voxel-Handler/static/js/runtime-main.e4a4f8c7.js",
+    "runtime-main.js.map": "/Tai-Shang-Voxel-Handler/static/js/runtime-main.e4a4f8c7.js.map",
+    "static/css/2.0dcad14b.chunk.css": "/Tai-Shang-Voxel-Handler/static/css/2.0dcad14b.chunk.css",
+    "static/js/2.97558362.chunk.js": "/Tai-Shang-Voxel-Handler/static/js/2.97558362.chunk.js",
+    "static/js/2.97558362.chunk.js.map": "/Tai-Shang-Voxel-Handler/static/js/2.97558362.chunk.js.map",
     "index.html": "/Tai-Shang-Voxel-Handler/index.html",
-    "static/css/2.d8e886af.chunk.css.map": "/Tai-Shang-Voxel-Handler/static/css/2.d8e886af.chunk.css.map",
+    "static/css/2.0dcad14b.chunk.css.map": "/Tai-Shang-Voxel-Handler/static/css/2.0dcad14b.chunk.css.map",
     "static/css/main.bb62dc15.chunk.css.map": "/Tai-Shang-Voxel-Handler/static/css/main.bb62dc15.chunk.css.map",
-    "static/js/2.f5691f45.chunk.js.LICENSE.txt": "/Tai-Shang-Voxel-Handler/static/js/2.f5691f45.chunk.js.LICENSE.txt"
+    "static/js/2.97558362.chunk.js.LICENSE.txt": "/Tai-Shang-Voxel-Handler/static/js/2.97558362.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.3039dbca.js",
-    "static/css/2.d8e886af.chunk.css",
-    "static/js/2.f5691f45.chunk.js",
+    "static/js/runtime-main.e4a4f8c7.js",
+    "static/css/2.0dcad14b.chunk.css",
+    "static/js/2.97558362.chunk.js",
     "static/css/main.bb62dc15.chunk.css",
-    "static/js/main.56f215b5.chunk.js"
+    "static/js/main.b6b95eaf.chunk.js"
   ]
 }

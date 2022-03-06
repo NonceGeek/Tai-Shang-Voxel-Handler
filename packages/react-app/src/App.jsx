@@ -1,4 +1,4 @@
-import { Button, Col, Menu, Row } from "antd";
+import { Button, Col, Menu, Row, message } from "antd";
 import "antd/dist/antd.css";
 import {
   useBalance,
@@ -33,6 +33,9 @@ import { Home, ExampleUI, Hints, Subgraph } from "./views";
 import { useStaticJsonRPC } from "./hooks";
 
 const { ethers } = require("ethers");
+
+const axios = require('axios');
+
 /*
     Welcome to 🏗 scaffold-eth !
 
@@ -63,6 +66,9 @@ const USE_NETWORK_SELECTOR = false;
 
 const web3Modal = Web3ModalSetup();
 
+// backend for voxel_handler
+// const serverUrl = "http://localhost:4000/voxel_handler/api/v1/place_order"; // elixir backend
+const serverUrl = "http://localhost:4000/voxel_handler/api/v1/verify_sig"; // elixir backend
 // 🛰 providers
 const providers = [
   "https://eth-mainnet.gateway.pokt.network/v1/lb/611156b4a585a20035148406",
@@ -290,6 +296,72 @@ function App(props) {
 
   const faucetAvailable = localProvider && localProvider.connection && targetNetwork.name.indexOf("local") !== -1;
 
+  const isSigner = injectedProvider && injectedProvider.getSigner && injectedProvider.getSigner()._isSigner
+
+  const [ loading, setLoading ] = useState()
+
+  const [ result, setResult ] = useState()
+
+  let display = ""
+  if(result){
+    let possibleTxId = result.substr(-66)
+    console.log("possibleTxId",possibleTxId)
+    let extraLink = ""
+    if(possibleTxId.indexOf("0x")==0){
+      extraLink = <a href={blockExplorer+"tx/"+possibleTxId} target="_blank">view transaction on etherscan</a>
+    }else{
+      possibleTxId=""
+    }
+    display = (
+      <div style={{marginTop:32}}>
+        {result.replace(possibleTxId,"")} {extraLink}
+      </div>
+    )
+
+  } else if(isSigner){
+    display = (
+      <Button loading={loading} style={{marginTop:32}} type="primary" onClick={async ()=>{
+
+        setLoading(true)
+        try{
+          const msgToSign = await axios.get(serverUrl)
+          console.log("msgToSign",msgToSign)
+          if(msgToSign.data && msgToSign.data.length > 32){//<--- traffic escape hatch?
+            let currentLoader = setTimeout(()=>{setLoading(false)},4000)
+            let message = msgToSign.data.replace("**ADDRESS**",address)
+            let sig = await injectedProvider.send("personal_sign", [ message, address ]);
+            clearTimeout(currentLoader)
+            currentLoader = setTimeout(()=>{setLoading(false)},4000)
+            console.log("sig",sig)
+            const res = await axios.post(serverUrl, {
+              address: address,
+              message: message,
+              signature: sig,
+            })
+            clearTimeout(currentLoader)
+            setLoading(false)
+            console.log("RESULT:",res)
+            if(res.data){
+              setResult(res.data)
+            }
+          }else{
+            setLoading(false)
+            setResult("😅 Sorry, the server is overloaded. Please try again later. ⏳")
+          }
+        }catch(e){
+          message.error(' Sorry, the server is overloaded. 🧯🚒🔥');
+          console.log("FAILED TO GET...")
+          console.log("hhhh"+e)
+        }
+
+
+
+      }}>
+        <span style={{marginRight:8}}>🔏</span>  sign a message with your ethereum wallet
+      </Button>
+    )
+  }
+
   return (
     <div className="App">
       {/* ✏️ Edit the header and change the title to your project name */}
@@ -399,6 +471,7 @@ function App(props) {
           <a href="https://www.google.com" target="_blank" rel="noreferrer">
             Make Voxel NFT from Virtual to Actual One by 3D Print! //TODO
           </a>
+          {display}
         </Route>
       </Switch>
 

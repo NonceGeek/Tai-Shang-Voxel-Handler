@@ -1,5 +1,9 @@
 defmodule VoxelHandlerWeb.Router do
+
   use VoxelHandlerWeb, :router
+  # for user
+  use Pow.Phoenix.Router
+  use Pow.Extension.Phoenix.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -10,21 +14,39 @@ defmodule VoxelHandlerWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :protected do
+    plug Pow.Plug.RequireAuthenticated,
+    error_handler: Pow.Phoenix.PlugErrorHandler
+  end
+
   pipeline :api do
+    plug :accepts, ["json"]
+  end
+
+  pipeline :api_allow_cross do
+    plug CORSPlug, origin: [~r/.*/]
     plug :accepts, ["json"]
   end
 
   scope "/", VoxelHandlerWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", IndexLive, :index
+
+    # user sign in
+    get "/user/sign-in", SessionController, :new
+    post "/user/sign-in", SessionController, :create
 
   end
 
   # Other scopes may use custom stacks.
   scope "/voxel_handler/api/v1", VoxelHandlerWeb do
-    pipe_through :api
-    post "/handle_vox", UploaderController, :handle
+    pipe_through :api_allow_cross
+    get "/place_order", OrderController, :get_msg
+    post "/place_order", OrderController, :place_order
+
+    get "/verify_sig", SigVerifierController, :get_msg
+    post "/verify_sig", SigVerifierController, :verify_sig
   end
 
   # Enables LiveDashboard only for development

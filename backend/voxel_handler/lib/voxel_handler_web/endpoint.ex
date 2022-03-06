@@ -22,6 +22,7 @@ defmodule VoxelHandlerWeb.Endpoint do
     gzip: false,
     only: ~w(assets fonts images favicon.ico robots.txt)
 
+  plug CORSPlug
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
@@ -46,5 +47,8 @@ defmodule VoxelHandlerWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  # pow
+  plug Pow.Plug.Session, otp_app: :voxel_handler
+
   plug VoxelHandlerWeb.Router
 end

@@ -36,7 +36,7 @@ defmodule VoxelHandlerWeb.Router do
     # user sign in
     get "/user/sign-in", SessionController, :new
     post "/user/sign-in", SessionController, :create
-
+    get "/user/logout", SessionController, :delete
   end
 
   # Other scopes may use custom stacks.

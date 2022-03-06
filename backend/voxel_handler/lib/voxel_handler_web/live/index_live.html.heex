@@ -1,13 +1,20 @@
+<div style="word-break:break-all">
 <%= if @logined == false do%>
     Please login first.
-    Test Acct: leeduckgo@leeduckgo.com 
-    Test Pwd: 123456789
+    <br>
+    <b>Test Acct: </b> leeduckgo@leeduckgo.com 
+    <br>
+    <b>Test Pwd: </b> 123456789
 <% else %>
     <%= for order <- @orders do%>
         <b>order id: </b> <%= order.unique_id %>
-        <b>order info: </b> <%= order.info %>
+        <br>
+        <b>order info: </b> <%= order.information %>
+        <br>
         <b>signature: </b> <%= order.signature %>
+        <br>
         <b>if finished: </b> <%= order.finished %>
         <hr>
     <% end %>
 <% end %>
+</div>

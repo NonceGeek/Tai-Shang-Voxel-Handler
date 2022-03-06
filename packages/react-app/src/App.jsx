@@ -362,6 +362,10 @@ function App(props) {
           <p></p>
           <p></p>
           <p>
+            {/*
+              todo: style good
+            */}
+            <img src="/magic-voxel.jpeg" style={{ zoom: '5%' }} alt="MagicVoxel"/>
             Create Voxels! &nbsp;
             <a href="https://www.youtube.com/watch?v=J5fK79E_RXE" target="_blank" rel="noreferrer">
               Tutorial

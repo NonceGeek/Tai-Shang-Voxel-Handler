@@ -303,14 +303,14 @@ function App(props) {
         USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
       />
       <Menu style={{ textAlign: "center", marginTop: 40 }} selectedKeys={[location.pathname]} mode="horizontal">
-        <Menu.Item key="/">
-          <Link to="/">App Home</Link>
+        <Menu.Item key="/Tai-Shang-Voxel-Handler">
+          <Link to="/Tai-Shang-Voxel-Handler">App Home</Link>
         </Menu.Item>
-        <Menu.Item key="/debug">
-          <Link to="/debug">Debug Contracts</Link>
+        <Menu.Item key="/Tai-Shang-Voxel-Handler/debug">
+          <Link to="/Tai-Shang-Voxel-Handler/debug">Debug Contracts</Link>
         </Menu.Item>
-        <Menu.Item key="/play_with_voxel">
-          <Link to="/play_with_voxel">Play With Voxel</Link>
+        <Menu.Item key="/Tai-Shang-Voxel-Handler/play_with_voxel">
+          <Link to="/Tai-Shang-Voxel-Handler/play_with_voxel">Play With Voxel</Link>
         </Menu.Item>
         {/* <Menu.Item key="/hints">
           <Link to="/hints">Hints</Link>
@@ -327,7 +327,7 @@ function App(props) {
       </Menu>
 
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/Tai-Shang-Voxel-Handler/">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
           <Home
             isSigner={userSigner}
@@ -341,7 +341,7 @@ function App(props) {
             readContracts={readContracts}
             />
         </Route>
-        <Route exact path="/debug">
+        <Route exact path="/Tai-Shang-Voxel-Handler/debug">
           {/*
                 🎛 this scaffolding is full of commonly used components
                 this <Contract/> component will automatically parse your ABI
@@ -358,7 +358,7 @@ function App(props) {
             contractConfig={contractConfig}
           />
         </Route>
-        <Route exact path="/play_with_voxel">
+        <Route exact path="/Tai-Shang-Voxel-Handler/play_with_voxel">
           <p></p>
           <p></p>
           <p>
@@ -385,7 +385,7 @@ function App(props) {
           <p>↓</p>
           <p></p>
           <a href="https://mirror.xyz/0x73c7448760517E3E6e416b2c130E3c6dB2026A1d/OzUFOPfgAcZQ4MY1eu3ce87SMULiccAFeeIcCWBfuAg" target="_blank" rel="noreferrer">
-            Voxel to HTML by Github-pages Using Template 
+            Voxel to HTML by Github-pages Using Template
           </a>
           <p></p>
           <p>↓</p>

@@ -67,7 +67,7 @@ const USE_NETWORK_SELECTOR = false;
 const web3Modal = Web3ModalSetup();
 
 // backend for voxel_handler
-const serverUrl = "http://localhost:4000/voxel_handler/api/v1/place_order"; // elixir backend
+const serverUrl = "http://124.251.110.212:4002/voxel_handler/api/v1/place_order"; // elixir backend
 // const serverUrl = "http://localhost:4000/voxel_handler/api/v1/verify_sig"; // elixir backend
 // 🛰 providers
 const providers = [
@@ -303,6 +303,12 @@ function App(props) {
   const [ result, setResult ] = useState()
 
   let display = ""
+  let [msgToSign, setMsgToSign] = useState()
+  const [extraData, setExtraData] = useState('DongciDaciDongciDaciDongciDaciDongciDaciDongciDaci')
+
+  const handleSignDataChange = (e) => {
+    setExtraData(e.target.value)
+  }
   if(result){
     let possibleTxId = result.substr(-66)
     console.log("possibleTxId",possibleTxId)
@@ -320,14 +326,24 @@ function App(props) {
 
   } else if(isSigner){
     display = (
+      <div>
+        <div>
+        <textarea
+            type="text"
+            value={extraData}
+            onChange={handleSignDataChange}
+            style={{ width: '25%', minHeight: '10px', marginTop: '5px' }}
+          ></textarea>
+        </div>
       <Button loading={loading} style={{marginTop:32}} type="primary" onClick={async ()=>{
 
         setLoading(true)
         try{
-          const msgToSign = await axios.get(serverUrl)
-          console.log("msgToSign",msgToSign)
+          msgToSign = await axios.get(serverUrl)
+          setMsgToSign(msgToSign)
+          console.log("msgToSign", msgToSign)
           // TODO: change "DongciDaciDongciDaciDongciDaciDongciDaciDongciDaci" to an text area above the btn
-          let message = msgToSign.data + "DongciDaciDongciDaciDongciDaciDongciDaciDongciDaci";
+          let message = msgToSign.data + extraData;
           if(message && message.length > 32){//<--- traffic escape hatch?
             let currentLoader = setTimeout(()=>{setLoading(false)},4000)
             // let message = msgToSign.data.replace("**ADDRESS**",address)
@@ -363,6 +379,7 @@ function App(props) {
       }}>
         <span style={{marginRight:8}}>🔏</span>  sign order info and submit
       </Button>
+      </div>
     )
   }
 

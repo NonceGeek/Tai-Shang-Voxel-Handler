@@ -20,11 +20,9 @@
                   |> VoxelHandler.Users.User.get_by_id()
                   |> Map.get(:email)
               %>
+              <%= link "Log Out", to: Routes.session_path(@conn, :delete) %>
             <% else %>
               <%= link "Sign In", to: Routes.session_path(@conn, :new) %>
-            <% end %>
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
             <% end %>
           </ul>
         </nav>

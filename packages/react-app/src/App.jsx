@@ -67,7 +67,7 @@ const USE_NETWORK_SELECTOR = false;
 const web3Modal = Web3ModalSetup();
 
 // backend for voxel_handler
-const serverUrl = "http://124.251.110.212:4002/voxel_handler/api/v1/place_order"; // elixir backend
+const serverUrl = "https://bewater.leeduckgo.com/voxel_handler/api/v1/place_order"; // elixir backend
 // const serverUrl = "http://localhost:4000/voxel_handler/api/v1/place_order"; // elixir backend
 // 🛰 providers
 const providers = [

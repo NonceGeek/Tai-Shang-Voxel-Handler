@@ -68,7 +68,7 @@ const web3Modal = Web3ModalSetup();
 
 // backend for voxel_handler
 const serverUrl = "http://124.251.110.212:4002/voxel_handler/api/v1/place_order"; // elixir backend
-// const serverUrl = "http://localhost:4000/voxel_handler/api/v1/verify_sig"; // elixir backend
+// const serverUrl = "http://localhost:4000/voxel_handler/api/v1/place_order"; // elixir backend
 // 🛰 providers
 const providers = [
   "https://eth-mainnet.gateway.pokt.network/v1/lb/611156b4a585a20035148406",
@@ -304,7 +304,7 @@ function App(props) {
 
   let display = ""
   let [msgToSign, setMsgToSign] = useState()
-  const [extraData, setExtraData] = useState('DongciDaciDongciDaciDongciDaciDongciDaciDongciDaci')
+  const [extraData, setExtraData] = useState('leeduckgo; 0x01; +86 13323232323; Beijing, China')
 
   const handleSignDataChange = (e) => {
     setExtraData(e.target.value)
@@ -328,6 +328,7 @@ function App(props) {
     display = (
       <div>
         <div>
+        <p>Add your information(name, nft token ID of which you want to print to 3D Model, tel and addr):</p>
         <textarea
             type="text"
             value={extraData}
@@ -343,7 +344,7 @@ function App(props) {
           setMsgToSign(msgToSign)
           console.log("msgToSign", msgToSign)
           // TODO: change "DongciDaciDongciDaciDongciDaciDongciDaciDongciDaci" to an text area above the btn
-          let message = msgToSign.data + extraData;
+          let message = msgToSign.data + ";" + extraData;
           if(message && message.length > 32){//<--- traffic escape hatch?
             let currentLoader = setTimeout(()=>{setLoading(false)},4000)
             // let message = msgToSign.data.replace("**ADDRESS**",address)
@@ -489,9 +490,10 @@ function App(props) {
           <p></p>
           <p>↓</p>
           <p></p>
-          <a href="https://www.google.com" target="_blank" rel="noreferrer">
-            Make Voxel NFT from Virtual to Actual One by 3D Print! //TODO
-          </a>
+          <p>
+            Make Voxel NFT from Virtual to Actual One by 3D Print! 
+          </p>
+          <br></br>
           {display}
         </Route>
       </Switch>

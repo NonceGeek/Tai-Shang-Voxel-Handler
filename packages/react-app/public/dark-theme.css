@@ -3960,6 +3960,7 @@ a.ant-btn-sm {
   text-align: right;
 }
 .ant-card {
+  width: 50%;
   box-sizing: border-box;
   margin: 0;
   padding: 0;

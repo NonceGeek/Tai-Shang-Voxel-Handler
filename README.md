@@ -1,5 +1,7 @@
 # Tai-Shang-Voxel-Handler
 
+focusing on handle voxel, voxel NFT and actual 3D model of voxel NFT by 3D printer.
+
 0. Prerequisites: [Node (v16 LTS)](https://nodejs.org/en/download/) plus [Yarn](https://classic.yarnpkg.com/en/docs/install/) and [Git](https://git-scm.com/downloads)
 
 1. clone/fork WeLightProject/Tai-Shang-Voxel-Handler:

@@ -34,8 +34,6 @@ import { useStaticJsonRPC } from "./hooks";
 
 const { ethers } = require("ethers");
 
-const axios = require('axios');
-
 /*
     Welcome to 🏗 scaffold-eth !
 
@@ -56,7 +54,7 @@ const axios = require('axios');
 */
 
 /// 📡 What chain are your contracts deployed to?
-const initialNetwork = NETWORKS.polygon; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const initialNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
 const DEBUG = true;
@@ -66,9 +64,6 @@ const USE_NETWORK_SELECTOR = false;
 
 const web3Modal = Web3ModalSetup();
 
-// backend for voxel_handler
-const serverUrl = "https://bewater.leeduckgo.com/voxel_handler/api/v1/place_order"; // elixir backend
-// const serverUrl = "http://localhost:4000/voxel_handler/api/v1/place_order"; // elixir backend
 // 🛰 providers
 const providers = [
   "https://eth-mainnet.gateway.pokt.network/v1/lb/611156b4a585a20035148406",
@@ -296,94 +291,6 @@ function App(props) {
 
   const faucetAvailable = localProvider && localProvider.connection && targetNetwork.name.indexOf("local") !== -1;
 
-  const isSigner = injectedProvider && injectedProvider.getSigner && injectedProvider.getSigner()._isSigner
-
-  const [ loading, setLoading ] = useState()
-
-  const [ result, setResult ] = useState()
-
-  let display = ""
-  let [msgToSign, setMsgToSign] = useState()
-  const [extraData, setExtraData] = useState('leeduckgo; 0x01; +86 13323232323; Beijing, China')
-
-  const handleSignDataChange = (e) => {
-    setExtraData(e.target.value)
-  }
-  if(result){
-    let possibleTxId = result.substr(-66)
-    console.log("possibleTxId",possibleTxId)
-    let extraLink = ""
-    if(possibleTxId.indexOf("0x")==0){
-      extraLink = <a href={blockExplorer+"tx/"+possibleTxId} target="_blank">view transaction on etherscan</a>
-    }else{
-      possibleTxId=""
-    }
-    display = (
-      <div style={{marginTop:32}}>
-        {result.replace(possibleTxId,"")} {extraLink}
-      </div>
-    )
-
-  } else if(isSigner){
-    display = (
-      <div>
-        <div>
-        <p>Add your information(name, nft token ID of which you want to print to 3D Model, tel and addr):</p>
-        <textarea
-            type="text"
-            value={extraData}
-            onChange={handleSignDataChange}
-            style={{ width: '25%', minHeight: '10px', marginTop: '5px' }}
-          ></textarea>
-        </div>
-      <Button loading={loading} style={{marginTop:32}} type="primary" onClick={async ()=>{
-
-        setLoading(true)
-        try{
-          msgToSign = await axios.get(serverUrl)
-          setMsgToSign(msgToSign)
-          console.log("msgToSign", msgToSign)
-          // TODO: change "DongciDaciDongciDaciDongciDaciDongciDaciDongciDaci" to an text area above the btn
-          let message = msgToSign.data + ";" + extraData;
-          if(message && message.length > 32){//<--- traffic escape hatch?
-            let currentLoader = setTimeout(()=>{setLoading(false)},4000)
-            // let message = msgToSign.data.replace("**ADDRESS**",address)
-            
-            let sig = await injectedProvider.send("personal_sign", [ message, address ]);
-            clearTimeout(currentLoader);
-            currentLoader = setTimeout(()=>{setLoading(false)},4000);
-            console.log("sig",sig)
-            const res = await axios.post(serverUrl, {
-              address: address,
-              message: message,
-              signature: sig,
-              unique_id: msgToSign.data,
-            })
-            clearTimeout(currentLoader)
-            setLoading(false)
-            console.log("RESULT:",res)
-            if(res.data){
-              setResult(res.data)
-            }
-          }else{
-            setLoading(false)
-            setResult("😅 Sorry, the server is overloaded. Please try again later. ⏳")
-          }
-        }catch(e){
-          message.error(' Sorry, the server is overloaded. 🧯🚒🔥');
-          console.log("FAILED TO GET...")
-          console.log("hhhh"+e)
-        }
-
-
-
-      }}>
-        <span style={{marginRight:8}}>🔏</span>  sign order info and submit
-      </Button>
-      </div>
-    )
-  }
-
   return (
     <div className="App">
       {/* ✏️ Edit the header and change the title to your project name */}
@@ -403,21 +310,6 @@ function App(props) {
         <Menu.Item key="/Tai-Shang-Voxel-Handler/debug">
           <Link to="/Tai-Shang-Voxel-Handler/debug">Debug Contracts</Link>
         </Menu.Item>
-        <Menu.Item key="/Tai-Shang-Voxel-Handler/play_with_voxel">
-          <Link to="/Tai-Shang-Voxel-Handler/play_with_voxel">Play With Voxel</Link>
-        </Menu.Item>
-        {/* <Menu.Item key="/hints">
-          <Link to="/hints">Hints</Link>
-        </Menu.Item>
-        <Menu.Item key="/exampleui">
-          <Link to="/exampleui">ExampleUI</Link>
-        </Menu.Item>
-        <Menu.Item key="/mainnetdai">
-          <Link to="/mainnetdai">Mainnet DAI</Link>
-        </Menu.Item>
-        <Menu.Item key="/subgraph">
-          <Link to="/subgraph">Subgraph</Link>
-        </Menu.Item> */}
       </Menu>
 
       <Switch>
@@ -451,50 +343,6 @@ function App(props) {
             blockExplorer={blockExplorer}
             contractConfig={contractConfig}
           />
-        </Route>
-        <Route exact path="/Tai-Shang-Voxel-Handler/play_with_voxel">
-          <p></p>
-          <p></p>
-          <p>
-            {/*
-              todo: style good
-            */}
-            <img src="/magic-voxel.jpeg" style={{ zoom: '5%' }} alt="MagicVoxel"/>
-            Create Voxels! &nbsp;
-            <a href="https://www.youtube.com/watch?v=J5fK79E_RXE" target="_blank" rel="noreferrer">
-              Tutorial
-            </a>
-            &nbsp;/&nbsp;
-            <a href="https://ephtracy.github.io/#ss-carousel_ss" target="_blank" rel="noreferrer">
-              Download MagicVoxel
-            </a>
-          </p>
-          <p></p>
-          <p>↓</p>
-          <p></p>
-          <a href="https://arweave.net/7izfDARufPcQr0qNLYtVGaeZK1UlQM8B_2VFznNosMs" target="_blank" rel="noreferrer">
-            Upload Voxel File to Arweave by Permaweb Dropper on Arweave
-          </a>
-          <p></p>
-          <p>↓</p>
-          <p></p>
-          <a href="https://mirror.xyz/0x73c7448760517E3E6e416b2c130E3c6dB2026A1d/OzUFOPfgAcZQ4MY1eu3ce87SMULiccAFeeIcCWBfuAg" target="_blank" rel="noreferrer">
-            Voxel to HTML by Github-pages Using Template
-          </a>
-          <p></p>
-          <p>↓</p>
-          <p></p>
-          <a href="/" target="" rel="noreferrer">
-            Mint Voxel as an NFT!
-          </a>
-          <p></p>
-          <p>↓</p>
-          <p></p>
-          <p>
-            Make Voxel NFT from Virtual to Actual One by 3D Print! 
-          </p>
-          <br></br>
-          {display}
         </Route>
       </Switch>
 

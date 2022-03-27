@@ -41,21 +41,13 @@ function Home({
             }}
           />
         </div>
+
         <div style={{ margin: 10}}>
-          <span>Github Pages URL</span>
+          <span>HTML URL</span>
           <Input
-            placeholder="eg. https://welightproject.github.io/voxel-viewer-page/"
+            placeholder="eg. "
             onChange={e => {
               setMintData({...mintData, url: e.target.value});
-            }}
-          />
-        </div>
-        <div style={{ margin: 10}}>
-          <span>Commit Hash</span>
-          <Input
-            placeholder="eg. e070f55ef44f41661a65048c0fd30af33e20ff7c"
-            onChange={e => {
-              setMintData({...mintData, commit: e.target.value});
             }}
           />
         </div>
@@ -63,7 +55,7 @@ function Home({
           <Button
             type={"primary"}
             onClick={() => {
-              tx(writeContracts.TaiShangVoxel.mint(mintData.uri, mintData.url, mintData.commit));
+              tx(writeContracts.TaiShangVoxel.mint(mintData.uri, mintData.url));
             }}
           >
             MINT

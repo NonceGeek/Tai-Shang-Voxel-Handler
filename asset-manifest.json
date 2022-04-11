@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/Tai-Shang-Voxel-Handler/static/css/main.bb62dc15.chunk.css",
-    "main.js": "/Tai-Shang-Voxel-Handler/static/js/main.289100a0.chunk.js",
-    "main.js.map": "/Tai-Shang-Voxel-Handler/static/js/main.289100a0.chunk.js.map",
+    "main.js": "/Tai-Shang-Voxel-Handler/static/js/main.e2e19470.chunk.js",
+    "main.js.map": "/Tai-Shang-Voxel-Handler/static/js/main.e2e19470.chunk.js.map",
     "runtime-main.js": "/Tai-Shang-Voxel-Handler/static/js/runtime-main.e4a4f8c7.js",
     "runtime-main.js.map": "/Tai-Shang-Voxel-Handler/static/js/runtime-main.e4a4f8c7.js.map",
     "static/css/2.0dcad14b.chunk.css": "/Tai-Shang-Voxel-Handler/static/css/2.0dcad14b.chunk.css",
-    "static/js/2.97558362.chunk.js": "/Tai-Shang-Voxel-Handler/static/js/2.97558362.chunk.js",
-    "static/js/2.97558362.chunk.js.map": "/Tai-Shang-Voxel-Handler/static/js/2.97558362.chunk.js.map",
+    "static/js/2.05cfcb7a.chunk.js": "/Tai-Shang-Voxel-Handler/static/js/2.05cfcb7a.chunk.js",
+    "static/js/2.05cfcb7a.chunk.js.map": "/Tai-Shang-Voxel-Handler/static/js/2.05cfcb7a.chunk.js.map",
     "index.html": "/Tai-Shang-Voxel-Handler/index.html",
     "static/css/2.0dcad14b.chunk.css.map": "/Tai-Shang-Voxel-Handler/static/css/2.0dcad14b.chunk.css.map",
     "static/css/main.bb62dc15.chunk.css.map": "/Tai-Shang-Voxel-Handler/static/css/main.bb62dc15.chunk.css.map",
-    "static/js/2.97558362.chunk.js.LICENSE.txt": "/Tai-Shang-Voxel-Handler/static/js/2.97558362.chunk.js.LICENSE.txt"
+    "static/js/2.05cfcb7a.chunk.js.LICENSE.txt": "/Tai-Shang-Voxel-Handler/static/js/2.05cfcb7a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e4a4f8c7.js",
     "static/css/2.0dcad14b.chunk.css",
-    "static/js/2.97558362.chunk.js",
+    "static/js/2.05cfcb7a.chunk.js",
     "static/css/main.bb62dc15.chunk.css",
-    "static/js/main.289100a0.chunk.js"
+    "static/js/main.e2e19470.chunk.js"
   ]
 }

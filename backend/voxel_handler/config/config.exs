@@ -10,6 +10,8 @@ import Config
 config :voxel_handler,
   ecto_repos: [VoxelHandler.Repo]
 
+config :voxel_handler, env: Mix.env()
+
 # Configures the endpoint
 config :voxel_handler, VoxelHandlerWeb.Endpoint,
   url: [host: "localhost"],

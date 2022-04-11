@@ -54,7 +54,7 @@ const { ethers } = require("ethers");
 */
 
 /// 📡 What chain are your contracts deployed to?
-const initialNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const initialNetwork = NETWORKS.meterTestnet; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
 const DEBUG = true;
@@ -310,6 +310,10 @@ function App(props) {
         <Menu.Item key="/Tai-Shang-Voxel-Handler/debug">
           <Link to="/Tai-Shang-Voxel-Handler/debug">Debug Contracts</Link>
         </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" href="https://gallery.noncegeek.com/tsv_meter">Gallery</a>
+        </Menu.Item>
+
       </Menu>
 
       <Switch>
@@ -344,6 +348,7 @@ function App(props) {
             contractConfig={contractConfig}
           />
         </Route>
+
       </Switch>
 
       <ThemeSwitch />

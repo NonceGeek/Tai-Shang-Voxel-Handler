@@ -12,6 +12,9 @@ import { Address, AddressInput } from "../components";
  * @param {*} readContracts contracts from current chain already pre-loaded using ethers contract module. More here https://docs.ethers.io/v5/api/contract/contract/
  * @returns react component
  **/
+/**
+  * For Level1
+ **/
 function Home({
   isSigner,
   loadWeb3Modal,

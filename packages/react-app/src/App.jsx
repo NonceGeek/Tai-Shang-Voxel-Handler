@@ -53,6 +53,7 @@ const { ethers } = require("ethers");
     (and then use the `useExternalContractLoader()` hook!)
 */
 
+/// For Level1
 /// 📡 What chain are your contracts deployed to?
 const initialNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
@@ -303,6 +304,8 @@ function App(props) {
         logoutOfWeb3Modal={logoutOfWeb3Modal}
         USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
       />
+
+      {/* = For Level1 */}
       <Menu style={{ textAlign: "center", marginTop: 40 }} selectedKeys={[location.pathname]} mode="horizontal">
         <Menu.Item key="/Tai-Shang-Voxel-Handler">
           <Link to="/Tai-Shang-Voxel-Handler">App Home</Link>
@@ -310,11 +313,17 @@ function App(props) {
         <Menu.Item key="/Tai-Shang-Voxel-Handler/debug">
           <Link to="/Tai-Shang-Voxel-Handler/debug">Debug Contracts</Link>
         </Menu.Item>
+      {/* How to add an link 
+        <Menu.Item>
+          <a target="_blank" href="https://gallery.noncegeek.com/tsv_meter">Gallery</a>
+        </Menu.Item>
       </Menu>
+      */}
 
       <Switch>
         <Route exact path="/Tai-Shang-Voxel-Handler/">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
+          {/* Level1 Home Component */}
           <Home
             isSigner={userSigner}
             yourCollectibles={yourCollectibles}

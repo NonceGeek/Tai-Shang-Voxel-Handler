@@ -291,7 +291,6 @@ function App(props) {
   }, [loadWeb3Modal]);
 
   const faucetAvailable = localProvider && localProvider.connection && targetNetwork.name.indexOf("local") !== -1;
-
   return (
     <div className="App">
       {/* ✏️ Edit the header and change the title to your project name */}
@@ -304,8 +303,6 @@ function App(props) {
         logoutOfWeb3Modal={logoutOfWeb3Modal}
         USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
       />
-
-      {/* = For Level1 */}
       <Menu style={{ textAlign: "center", marginTop: 40 }} selectedKeys={[location.pathname]} mode="horizontal">
         <Menu.Item key="/Tai-Shang-Voxel-Handler">
           <Link to="/Tai-Shang-Voxel-Handler">App Home</Link>
@@ -313,17 +310,23 @@ function App(props) {
         <Menu.Item key="/Tai-Shang-Voxel-Handler/debug">
           <Link to="/Tai-Shang-Voxel-Handler/debug">Debug Contracts</Link>
         </Menu.Item>
-      {/* How to add an link 
-        <Menu.Item>
-          <a target="_blank" href="https://gallery.noncegeek.com/tsv_meter">Gallery</a>
+        {/* <Menu.Item key="/hints">
+          <Link to="/hints">Hints</Link>
         </Menu.Item>
+        <Menu.Item key="/exampleui">
+          <Link to="/exampleui">ExampleUI</Link>
+        </Menu.Item>
+        <Menu.Item key="/mainnetdai">
+          <Link to="/mainnetdai">Mainnet DAI</Link>
+        </Menu.Item>
+        <Menu.Item key="/subgraph">
+          <Link to="/subgraph">Subgraph</Link>
+        </Menu.Item> */}
       </Menu>
-      */}
 
       <Switch>
         <Route exact path="/Tai-Shang-Voxel-Handler/">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
-          {/* Level1 Home Component */}
           <Home
             isSigner={userSigner}
             yourCollectibles={yourCollectibles}
@@ -352,6 +355,49 @@ function App(props) {
             blockExplorer={blockExplorer}
             contractConfig={contractConfig}
           />
+        </Route>
+        <Route exact path="/Tai-Shang-Voxel-Handler/play_with_voxel">
+          <p></p>
+          <p></p>
+          <p>
+            {/*
+              todo: style good
+            */}
+            <img src="/magic-voxel.jpeg" style={{ zoom: '5%' }} alt="MagicVoxel"/>
+            Create Voxels! &nbsp;
+            <a href="https://www.youtube.com/watch?v=J5fK79E_RXE" target="_blank" rel="noreferrer">
+              Tutorial
+            </a>
+            &nbsp;/&nbsp;
+            <a href="https://ephtracy.github.io/#ss-carousel_ss" target="_blank" rel="noreferrer">
+              Download MagicVoxel
+            </a>
+          </p>
+          <p></p>
+          <p>↓</p>
+          <p></p>
+          <a href="https://arweave.net/7izfDARufPcQr0qNLYtVGaeZK1UlQM8B_2VFznNosMs" target="_blank" rel="noreferrer">
+            Upload Voxel File to Arweave by Permaweb Dropper on Arweave
+          </a>
+          <p></p>
+          <p>↓</p>
+          <p></p>
+          <a href="https://mirror.xyz/0x73c7448760517E3E6e416b2c130E3c6dB2026A1d/OzUFOPfgAcZQ4MY1eu3ce87SMULiccAFeeIcCWBfuAg" target="_blank" rel="noreferrer">
+            Voxel to HTML by Github-pages Using Template
+          </a>
+          <p></p>
+          <p>↓</p>
+          <p></p>
+          <a href="/" target="" rel="noreferrer">
+            Mint Voxel as an NFT!
+          </a>
+          <p></p>
+          <p>↓</p>
+          <p></p>
+          <p>
+            Make Voxel NFT from Virtual to Actual One by 3D Print! 
+          </p>
+          <br></br>
         </Route>
       </Switch>
 
